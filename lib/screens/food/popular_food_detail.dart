@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
-import 'package:food_delivery/widgets/Icon_and_Text.dart';
+import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
-
-import '../../utils/colors.dart';
-import '../../widgets/big_text.dart';
-import '../../widgets/small_text.dart';
+import 'package:food_delivery/widgets/big_text.dart';
+import 'package:food_delivery/widgets/expandable_text.dart';
 
 class PopularDoodDetail extends StatelessWidget {
   const PopularDoodDetail({super.key});
@@ -15,7 +14,9 @@ class PopularDoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(children: [
+        //background image
         Positioned(
             left: 0,
             right: 0,
@@ -27,6 +28,7 @@ class PopularDoodDetail extends StatelessWidget {
                       fit: BoxFit.cover,
                       image: AssetImage("assets/image/food0.png"))),
             )),
+        //icon widget
         Positioned(
             top: Dimensions.height45,
             left: Dimensions.width20,
@@ -38,6 +40,7 @@ class PopularDoodDetail extends StatelessWidget {
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             )),
+        //intro of food
         Positioned(
             left: 0,
             right: 0,
@@ -59,60 +62,86 @@ class PopularDoodDetail extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BigText(text: "Chinese Side"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                            children: List.generate(
-                                5,
-                                (index) => Icon(
-                                      Icons.star,
-                                      color: AppColors.mainColor,
-                                      size: 15,
-                                    ))),
-                        SizedBox(
-                          width: Dimensions.height10,
-                        ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: "1287"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: "Comments"),
-                      ],
+                    AppColumn(
+                      text: 'Chinese Side',
                     ),
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        IconAndText(
-                            icon: Icons.circle_sharp,
-                            text: "Normal",
-                            iconColor: AppColors.iconColor1),
-                        IconAndText(
-                            icon: Icons.location_on,
-                            text: "1.7km",
-                            iconColor: AppColors.mainColor),
-                        IconAndText(
-                            icon: Icons.access_time_rounded,
-                            text: "32min",
-                            iconColor: AppColors.iconColor2),
-                      ],
+                    BigText(text: "Introduce"),
+                    SizedBox(
+                      height: Dimensions.height20,
                     ),
-                    
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ExpandableText(
+                            text:
+                                "This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android. This is a shopping app with backend of Laravel and Laravel admin panel using restful api complete CRUD operations. We also used firebase for notification. This tutorial covers complete shopping cart, placing orders, signup or registration, sign-in or login, payment."),
+                      ),
+                    )
                   ],
                 ),
               ),
             ))
       ]),
+      bottomNavigationBar: Container(
+        height: Dimensions.bottomHeightBar,
+        padding: EdgeInsets.only(
+            top: Dimensions.height30,
+            bottom: Dimensions.height30,
+            left: Dimensions.width20,
+            right: Dimensions.width20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radius20 * 20),
+            topRight: Radius.circular(Dimensions.radius20 * 2),
+          ),
+          color: AppColors.buttonBackgroundColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: Colors.white),
+              child: Row(
+                children: [
+                  Icon(Icons.remove, color: AppColors.signColor),
+                  SizedBox(
+                    width: Dimensions.width10 / 2,
+                  ),
+                  BigText(text: "0"),
+                  SizedBox(
+                    width: Dimensions.width10 / 2,
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: AppColors.signColor,
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: AppColors.mainColor,
+              ),
+              child: BigText(text: "\$10 | Add to cart", color: Colors.white),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

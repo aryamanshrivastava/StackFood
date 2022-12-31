@@ -52,7 +52,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                     color: AppColors.mainColor),
                 child: Icon(
                   Icons.search,
-                  size: Dimensions.iconsize,
+                  size: Dimensions.iconsize16,
                   color: Colors.white,
                 ),
               ),
